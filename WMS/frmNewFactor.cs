@@ -18,7 +18,7 @@ namespace WMS
         }
         private void frmNewFactor_Load(object sender, EventArgs e)
         {
-            this.kalaTableAdapter.Fill(this.dsWMS.kala);
+            //this.kalaTableAdapter.Fill(this.dsWMS.kala);
 
             this.anbarTableAdapter.Fill(this.dsWMS.anbar);
             this.foroshandehTableAdapter.FillBySellersNameFamily(dsWMS.foroshandeh);

@@ -505,6 +505,7 @@
             this.cmbNewFactorCommodityUnitPrice.DataSource = this.kalaBindingSource;
             this.cmbNewFactorCommodityUnitPrice.DisplayMember = "unitprice";
             this.cmbNewFactorCommodityUnitPrice.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbNewFactorCommodityUnitPrice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbNewFactorCommodityUnitPrice.Enabled = false;
             this.cmbNewFactorCommodityUnitPrice.FormattingEnabled = true;
             this.cmbNewFactorCommodityUnitPrice.ItemHeight = 15;
@@ -605,6 +606,7 @@
             this.cmbNewFactorCommodityName.DataSource = this.kalaBindingSource;
             this.cmbNewFactorCommodityName.DisplayMember = "name";
             this.cmbNewFactorCommodityName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbNewFactorCommodityName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbNewFactorCommodityName.FormattingEnabled = true;
             this.cmbNewFactorCommodityName.ItemHeight = 15;
             this.cmbNewFactorCommodityName.Location = new System.Drawing.Point(461, 38);
