@@ -54,9 +54,8 @@ namespace WMS
 
         private void dgvFactors_MouseUp(object sender, MouseEventArgs e)
         {
-            selectedFactorId = dgvFactors[0,dgvFactors.CurrentRow.Index].Value.ToString();
-            if (selectedFactorId != null)
-            {
+            if (dgvFactors.Rows.Count > 0) { 
+                selectedFactorId = dgvFactors[0,dgvFactors.CurrentRow.Index].Value.ToString();
                 this.aghlamTableAdapter.FillByAghlamFactorNumber(this.dsWMS.aghlam, selectedFactorId);
                 lblTotalPrice.Text = calculateTotalSum().ToString();
             }
@@ -106,6 +105,12 @@ namespace WMS
                 e.Handled = true;
                 MessageBox.Show("لطفا عدد وارد کنید", "هشدار", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
             }
+        }
+
+        private void panelSearchFactor_VisibleChanged(object sender, EventArgs e)
+        {
+            txtPanelFactorCode.Clear();
+            txtPanelFactorRecipient.Clear();
         }
     }
 }

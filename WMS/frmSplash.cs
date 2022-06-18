@@ -16,11 +16,17 @@ namespace WMS
             InitializeComponent();
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void timer_Tick(object sender, EventArgs e)
         {
-                timer1.Enabled = false;
+            progressBar.PerformStep();
+
+            if (progressBar.Value == progressBar.Maximum)
+            {
+                timer.Enabled = false;
                 this.Hide();
                 new frmLogin().ShowDialog();
+            }
+            
         }
     }
 }
