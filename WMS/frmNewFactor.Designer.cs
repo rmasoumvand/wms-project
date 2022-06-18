@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmNewFactor));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.expandablePanel1 = new DevComponents.DotNetBar.ExpandablePanel();
             this.btnUpdateNewFactor = new DevComponents.DotNetBar.ButtonX();
             this.cmbRecipients = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -55,6 +55,7 @@
             this.labelX6 = new DevComponents.DotNetBar.LabelX();
             this.expandablePanel3 = new DevComponents.DotNetBar.ExpandablePanel();
             this.cmbNewFactorCommodityDesc = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.kalaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.labelX12 = new DevComponents.DotNetBar.LabelX();
             this.btnDeleteFactorItem = new DevComponents.DotNetBar.ButtonX();
             this.labelX11 = new DevComponents.DotNetBar.LabelX();
@@ -93,7 +94,6 @@
             this.anbarTableAdapter = new WMS.dsWMSTableAdapters.anbarTableAdapter();
             this.factorTableAdapter = new WMS.dsWMSTableAdapters.factorTableAdapter();
             this.aghlamTableAdapter = new WMS.dsWMSTableAdapters.aghlamTableAdapter();
-            this.kalaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.kalaTableAdapter = new WMS.dsWMSTableAdapters.kalaTableAdapter();
             this.expandablePanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tahvilgirandehBindingSource)).BeginInit();
@@ -102,13 +102,13 @@
             this.expandablePanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.anbarBindingSource)).BeginInit();
             this.expandablePanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kalaBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNewFactorCommodities)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.aghlamBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsWMS1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX2)).BeginInit();
             this.ribbonClientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kalaBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // expandablePanel1
@@ -275,7 +275,7 @@
             this.txtFactorNumber.Size = new System.Drawing.Size(122, 21);
             this.txtFactorNumber.TabIndex = 2;
             this.txtFactorNumber.TextChanged += new System.EventHandler(this.txtFactorNumber_TextChanged);
-            this.txtFactorNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxX1_KeyPress);
+            this.txtFactorNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkInputNumber_Event);
             // 
             // txtFactorDate
             // 
@@ -351,7 +351,7 @@
             this.txtNewFactorRecientNumber.Name = "txtNewFactorRecientNumber";
             this.txtNewFactorRecientNumber.Size = new System.Drawing.Size(122, 21);
             this.txtNewFactorRecientNumber.TabIndex = 6;
-            this.txtNewFactorRecientNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxX6_KeyPress);
+            this.txtNewFactorRecientNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkInputNumber_Event);
             // 
             // labelX5
             // 
@@ -437,7 +437,11 @@
             this.cmbNewFactorCommodityDesc.Size = new System.Drawing.Size(122, 21);
             this.cmbNewFactorCommodityDesc.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cmbNewFactorCommodityDesc.TabIndex = 21;
-            this.cmbNewFactorCommodityDesc.SelectedIndexChanged += new System.EventHandler(this.cmb_des_SelectedIndexChanged);
+            // 
+            // kalaBindingSource
+            // 
+            this.kalaBindingSource.DataMember = "kala";
+            this.kalaBindingSource.DataSource = this.dsWMS;
             // 
             // labelX12
             // 
@@ -465,7 +469,7 @@
             this.btnDeleteFactorItem.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnDeleteFactorItem.TabIndex = 6;
             this.btnDeleteFactorItem.Text = "حذف";
-            this.btnDeleteFactorItem.Click += new System.EventHandler(this.buttonX2_Click);
+            this.btnDeleteFactorItem.Click += new System.EventHandler(this.btnDeleteFactorItem_Click);
             // 
             // labelX11
             // 
@@ -537,7 +541,7 @@
             this.btnAddFactorItem.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnAddFactorItem.TabIndex = 5;
             this.btnAddFactorItem.Text = "اضافه کردن";
-            this.btnAddFactorItem.Click += new System.EventHandler(this.buttonX1_Click);
+            this.btnAddFactorItem.Click += new System.EventHandler(this.btnAddNewFactorItem_Click);
             // 
             // labelX9
             // 
@@ -594,7 +598,7 @@
             this.txtNewFactorCommodityAmount.Name = "txtNewFactorCommodityAmount";
             this.txtNewFactorCommodityAmount.Size = new System.Drawing.Size(122, 21);
             this.txtNewFactorCommodityAmount.TabIndex = 0;
-            this.txtNewFactorCommodityAmount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxX4_KeyPress);
+            this.txtNewFactorCommodityAmount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkInputNumber_Event);
             // 
             // cmbNewFactorCommodityName
             // 
@@ -609,7 +613,6 @@
             this.cmbNewFactorCommodityName.Size = new System.Drawing.Size(122, 21);
             this.cmbNewFactorCommodityName.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cmbNewFactorCommodityName.TabIndex = 11;
-            this.cmbNewFactorCommodityName.SelectedIndexChanged += new System.EventHandler(this.comboBoxEx4_SelectedIndexChanged);
             // 
             // labelX7
             // 
@@ -630,8 +633,8 @@
             // 
             this.dgvNewFactorCommodities.AllowUserToAddRows = false;
             this.dgvNewFactorCommodities.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.dgvNewFactorCommodities.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.dgvNewFactorCommodities.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvNewFactorCommodities.AutoGenerateColumns = false;
             this.dgvNewFactorCommodities.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dgvNewFactorCommodities.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -648,14 +651,14 @@
             this.totalpriceDataGridViewTextBoxColumn,
             this.tarikhDataGridViewTextBoxColumn});
             this.dgvNewFactorCommodities.DataSource = this.aghlamBindingSource;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvNewFactorCommodities.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvNewFactorCommodities.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvNewFactorCommodities.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvNewFactorCommodities.Location = new System.Drawing.Point(1, 106);
             this.dgvNewFactorCommodities.MultiSelect = false;
@@ -665,7 +668,7 @@
             this.dgvNewFactorCommodities.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvNewFactorCommodities.Size = new System.Drawing.Size(693, 172);
             this.dgvNewFactorCommodities.TabIndex = 2;
-            this.dgvNewFactorCommodities.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dataGridViewX1_MouseUp);
+            this.dgvNewFactorCommodities.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dgvNewFactorCommodities_MouseUp);
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -757,14 +760,14 @@
             // dataGridViewX2
             // 
             this.dataGridViewX2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewX2.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewX2.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewX2.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dataGridViewX2.Location = new System.Drawing.Point(775, 338);
             this.dataGridViewX2.Name = "dataGridViewX2";
@@ -828,14 +831,14 @@
             // dataGridViewX3
             // 
             this.dataGridViewX3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewX3.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewX3.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewX3.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dataGridViewX3.Location = new System.Drawing.Point(775, 244);
             this.dataGridViewX3.Name = "dataGridViewX3";
@@ -871,11 +874,6 @@
             // 
             this.aghlamTableAdapter.ClearBeforeFill = true;
             // 
-            // kalaBindingSource
-            // 
-            this.kalaBindingSource.DataMember = "kala";
-            this.kalaBindingSource.DataSource = this.dsWMS;
-            // 
             // kalaTableAdapter
             // 
             this.kalaTableAdapter.ClearBeforeFill = true;
@@ -907,13 +905,13 @@
             this.expandablePanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.anbarBindingSource)).EndInit();
             this.expandablePanel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kalaBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNewFactorCommodities)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.aghlamBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsWMS1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX2)).EndInit();
             this.ribbonClientPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kalaBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
