@@ -14,25 +14,13 @@ namespace WMS
         private int calculateTotalSum()
         {
             int sum = 0;
-            for (int i = 0; i < dgvFactors.RowCount - 1; i++)
+            for (int i = 0; i < dgvCommodities.RowCount; i++)
             {
-                string price;
-                if (dgvCommodities.RowCount > 1)
-                    price = dgvCommodities[9, i].Value.ToString();
-                else if (dgvCommodities.RowCount == 1)
-                {
-                    price = dgvCommodities[9, 0].Value.ToString();
-                    sum += int.Parse(price);
-                    break;
-                }
-                else
-                {
-                    sum = 0;
-                    break;
-                }
-                sum += int.Parse(price);
+                string priceColumn = dgvCommodities[9, i].Value.ToString();
+                sum += int.Parse(priceColumn);
+
             }
-            return sum;
+            return sum; 
         }
         public frmFactor()
         {
