@@ -5690,7 +5690,7 @@ namespace WMS.dsWMSTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[2];
+            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[3];
             this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT id, shfact, name, des, country, anbar, cter, unit, unitprice, totalprice, " +
@@ -5698,10 +5698,15 @@ namespace WMS.dsWMSTableAdapters {
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "SELECT     id, shfact, name, des, country, anbar, cter, unit, unitprice, totalpri" +
-                "ce, tarikh\r\nFROM         aghlam\r\nWHERE     (shfact = ?)";
+            this._commandCollection[1].CommandText = "DELETE FROM aghlam\r\nWHERE     (shfact = ?)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[1].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("shfact", global::System.Data.OleDb.OleDbType.WChar, 255, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "shfact", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("shfact", global::System.Data.OleDb.OleDbType.WChar, 255, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "shfact", global::System.Data.DataRowVersion.Original, false, null));
+            this._commandCollection[2] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = "SELECT     id, shfact, name, des, country, anbar, cter, unit, unitprice, totalpri" +
+                "ce, tarikh\r\nFROM         aghlam\r\nWHERE     (shfact = ?)";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("shfact", global::System.Data.OleDb.OleDbType.WChar, 255, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "shfact", global::System.Data.DataRowVersion.Current, false, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5733,7 +5738,7 @@ namespace WMS.dsWMSTableAdapters {
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
         public virtual int FillByAghlamFactorNumber(dsWMS.aghlamDataTable dataTable, string shfact) {
-            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand = this.CommandCollection[2];
             if ((shfact == null)) {
                 this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -5861,6 +5866,35 @@ namespace WMS.dsWMSTableAdapters {
                     this.Adapter.InsertCommand.Connection.Close();
                 }
             }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, false)]
+        public virtual int DeleteAghlam(string shfact) {
+            global::System.Data.OleDb.OleDbCommand command = this.CommandCollection[1];
+            if ((shfact == null)) {
+                command.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[0].Value = ((string)(shfact));
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
         }
     }
     
@@ -7149,35 +7183,47 @@ namespace WMS.dsWMSTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[5];
+            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[7];
             this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT ID, seller, custumer, dt, num_res_anbar, t_kala FROM factor";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "SELECT  num_res_anbar FROM factor WHERE (ID = ?)";
+            this._commandCollection[1].CommandText = "DELETE FROM factor\r\nWHERE     (ID = ?)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[1].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ID", global::System.Data.OleDb.OleDbType.WChar, 255, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ID", global::System.Data.OleDb.OleDbType.WChar, 255, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID", global::System.Data.DataRowVersion.Original, false, null));
             this._commandCollection[2] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[2].Connection = this.Connection;
-            this._commandCollection[2].CommandText = "SELECT COUNT(ID) FROM factor WHERE (ID = ?)";
+            this._commandCollection[2].CommandText = "SELECT     ID, seller, custumer, dt, num_res_anbar, t_kala\r\nFROM         factor\r\n" +
+                "WHERE     (ID = ?) OR\r\n                      (custumer = ?)";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ID", global::System.Data.OleDb.OleDbType.WChar, 255, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("custumer", global::System.Data.OleDb.OleDbType.WChar, 255, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "custumer", global::System.Data.DataRowVersion.Current, false, null));
             this._commandCollection[3] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[3].Connection = this.Connection;
-            this._commandCollection[3].CommandText = "SELECT num_res_anbar FROM factor where (ID =?)";
+            this._commandCollection[3].CommandText = "SELECT  num_res_anbar FROM factor WHERE (ID = ?)";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[3].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ID", global::System.Data.OleDb.OleDbType.WChar, 255, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID", global::System.Data.DataRowVersion.Current, false, null));
             this._commandCollection[4] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[4].Connection = this.Connection;
-            this._commandCollection[4].CommandText = "UPDATE    factor\r\nSET              seller = ?, custumer = ?,  num_res_anbar = ?\r\n" +
-                "WHERE     (ID = ?)";
+            this._commandCollection[4].CommandText = "SELECT COUNT(ID) FROM factor WHERE (ID = ?)";
             this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[4].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("seller", global::System.Data.OleDb.OleDbType.WChar, 255, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "seller", global::System.Data.DataRowVersion.Current, false, null));
-            this._commandCollection[4].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("custumer", global::System.Data.OleDb.OleDbType.WChar, 255, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "custumer", global::System.Data.DataRowVersion.Current, false, null));
-            this._commandCollection[4].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("num_res_anbar", global::System.Data.OleDb.OleDbType.WChar, 255, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "num_res_anbar", global::System.Data.DataRowVersion.Current, false, null));
-            this._commandCollection[4].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ID", global::System.Data.OleDb.OleDbType.WChar, 255, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID", global::System.Data.DataRowVersion.Original, false, null));
+            this._commandCollection[4].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ID", global::System.Data.OleDb.OleDbType.WChar, 255, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[5] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection[5].Connection = this.Connection;
+            this._commandCollection[5].CommandText = "SELECT num_res_anbar FROM factor where (ID =?)";
+            this._commandCollection[5].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[5].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ID", global::System.Data.OleDb.OleDbType.WChar, 255, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[6] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection[6].Connection = this.Connection;
+            this._commandCollection[6].CommandText = "UPDATE    factor\r\nSET              seller = ?, custumer = ?,  num_res_anbar = ?\r\n" +
+                "WHERE     (ID = ?)";
+            this._commandCollection[6].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[6].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("seller", global::System.Data.OleDb.OleDbType.WChar, 255, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "seller", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[6].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("custumer", global::System.Data.OleDb.OleDbType.WChar, 255, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "custumer", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[6].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("num_res_anbar", global::System.Data.OleDb.OleDbType.WChar, 255, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "num_res_anbar", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[6].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ID", global::System.Data.OleDb.OleDbType.WChar, 255, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID", global::System.Data.DataRowVersion.Original, false, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7208,8 +7254,33 @@ namespace WMS.dsWMSTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByFactorId(dsWMS.factorDataTable dataTable, string ID, string custumer) {
+            this.Adapter.SelectCommand = this.CommandCollection[2];
+            if ((ID == null)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(ID));
+            }
+            if ((custumer == null)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((string)(custumer));
+            }
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
         public virtual int FillByWarehouseManager(dsWMS.factorDataTable dataTable, string ID) {
-            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand = this.CommandCollection[3];
             if ((ID == null)) {
                 this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -7490,8 +7561,37 @@ namespace WMS.dsWMSTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, false)]
+        public virtual int DeleteFactor(string ID) {
+            global::System.Data.OleDb.OleDbCommand command = this.CommandCollection[1];
+            if ((ID == null)) {
+                command.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[0].Value = ((string)(ID));
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         public virtual global::System.Nullable<int> QueryFactorById(string ID) {
-            global::System.Data.OleDb.OleDbCommand command = this.CommandCollection[2];
+            global::System.Data.OleDb.OleDbCommand command = this.CommandCollection[4];
             if ((ID == null)) {
                 command.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -7525,7 +7625,7 @@ namespace WMS.dsWMSTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         public virtual string QueryWarehouseReciptById(string ID) {
-            global::System.Data.OleDb.OleDbCommand command = this.CommandCollection[3];
+            global::System.Data.OleDb.OleDbCommand command = this.CommandCollection[5];
             if ((ID == null)) {
                 command.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -7560,7 +7660,7 @@ namespace WMS.dsWMSTableAdapters {
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, false)]
         public virtual int UpdateFactor(string seller, string custumer, string num_res_anbar, string Original_ID) {
-            global::System.Data.OleDb.OleDbCommand command = this.CommandCollection[4];
+            global::System.Data.OleDb.OleDbCommand command = this.CommandCollection[6];
             if ((seller == null)) {
                 command.Parameters[0].Value = global::System.DBNull.Value;
             }

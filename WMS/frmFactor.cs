@@ -11,129 +11,91 @@ namespace WMS
 {
     public partial class frmFactor : Form
     {
-        public frmFactor()
+        private int calculateTotalSum()
         {
-            InitializeComponent();
-        }
-        string sh;
-        private void buttonX1_Click(object sender, EventArgs e)
-        {
-            new frmNewFactor().ShowDialog();
-        }
-
-        private void frmFactor_Load(object sender, EventArgs e)
-        {
-            panelEx1.Visible = false;
-            DataTable dt = new DataTable();
-            DataBase db = new DataBase();
-            dt = db.MySelect("select * from factor");
-            dataGridViewX1.DataSource = dt;
-            dataGridViewX1.Columns[0].HeaderText = " کد فاکتور";
-            dataGridViewX1.Columns[1].HeaderText = "فروشنده ";
-            dataGridViewX1.Columns[2].HeaderText = "خریدار";
-            dataGridViewX1.Columns[3].HeaderText = "تاریخ صدور";
-            dataGridViewX1.Columns[4].HeaderText = "شماره رسید";
-            dataGridViewX1.Columns[5].HeaderText = "تعداد اقلام";
-            if(dataGridViewX1.RowCount>1)
-            sh=dataGridViewX1[0,0].Value.ToString();
-            dt = db.MySelect("select * from aghlam where shfact='"+sh+"'");
-            dataGridViewX2.DataSource = dt;
-            dataGridViewX2.Columns[0].HeaderText = "کدکالا";
-            dataGridViewX2.Columns[1].HeaderText = "کد فاکتور";
-            dataGridViewX2.Columns[2].HeaderText = "نام کالا ";
-            dataGridViewX2.Columns[3].HeaderText = "توضیحات";
-            dataGridViewX2.Columns[4].HeaderText = "کشور سازنده";
-            dataGridViewX2.Columns[5].HeaderText = " نام انبار";
-            dataGridViewX2.Columns[6].HeaderText = "تعداد";
-            dataGridViewX2.Columns[7].HeaderText = "واحد";
-            dataGridViewX2.Columns[8].HeaderText = "قیمت واحد";
-            dataGridViewX2.Columns[9].HeaderText = "قیمت کل";
-            dataGridViewX2.Columns[10].HeaderText = " تاریخ ثیت";
-            
-        }
-
-        private void dataGridViewX1_MouseUp(object sender, MouseEventArgs e)
-        {
-            DataTable dt = new DataTable();
-            DataBase db = new DataBase();
-            sh = dataGridViewX1[0,dataGridViewX1.CurrentRow.Index].Value.ToString();
-            dt = db.MySelect("select *from aghlam where shfact='" + sh + "'");
-            dataGridViewX2.DataSource = dt;
-            dataGridViewX2.Columns[0].HeaderText = "کدکالا";
-            dataGridViewX2.Columns[1].HeaderText = "کد فاکتور";
-            dataGridViewX2.Columns[2].HeaderText = "نام کالا ";
-            dataGridViewX2.Columns[3].HeaderText = "توضیحات";
-            dataGridViewX2.Columns[4].HeaderText = "کشور سازنده";
-            dataGridViewX2.Columns[5].HeaderText = " نام انبار";
-            dataGridViewX2.Columns[6].HeaderText = "تعداد";
-            dataGridViewX2.Columns[7].HeaderText = "واحد";
-            dataGridViewX2.Columns[8].HeaderText = "قیمت واحد";
-            dataGridViewX2.Columns[9].HeaderText = "قیمت کل";
-            dataGridViewX2.Columns[10].HeaderText = " تاریخ ثیت";
-
             int sum = 0;
-            for (int i = 0; i < dataGridViewX1.RowCount-1; i++)
+            for (int i = 0; i < dgvFactors.RowCount - 1; i++)
             {
                 string price;
-                if (dataGridViewX2.RowCount > 1)
-                    price = dataGridViewX2[9, i].Value.ToString();
-                else if (dataGridViewX2.RowCount == 1)
+                if (dgvCommodities.RowCount > 1)
+                    price = dgvCommodities[9, i].Value.ToString();
+                else if (dgvCommodities.RowCount == 1)
                 {
-                    price = dataGridViewX2[9, 0].Value.ToString();
+                    price = dgvCommodities[9, 0].Value.ToString();
                     sum += int.Parse(price);
                     break;
                 }
-                else {
+                else
+                {
                     sum = 0;
                     break;
                 }
                 sum += int.Parse(price);
             }
-            lab_ghimat_kol.Text = sum.ToString();
+            return sum;
         }
-
-        private void buttonX3_Click(object sender, EventArgs e)
+        public frmFactor()
         {
-            DataBase db = new DataBase();
-            db.DoCommand("delete from factor where id='"+sh+"'");
-            db.DoCommand("delete from aghlam where shfact='" + sh + "'");
-            frmFactor_Load(sender, e);
-            MessageBox.Show("حذف شد","پیام",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            InitializeComponent();
+        }
+        private string selectedFactorId;
+        private void btnAddEdit_Click(object sender, EventArgs e)
+        {
+            new frmNewFactor().ShowDialog();
+            selectedFactorId = null;
         }
 
-        private void buttonX2_Click(object sender, EventArgs e)
+        private void frmFactor_Load(object sender, EventArgs e)
+        {
+            this.factorTableAdapter.Fill(this.dsWMS.factor);
+            panelSearchFactor.Visible = false;
+            lblTotalPrice.Text = calculateTotalSum().ToString();
+        }
+
+        private void dgvFactors_MouseUp(object sender, MouseEventArgs e)
+        {
+            selectedFactorId = dgvFactors[0,dgvFactors.CurrentRow.Index].Value.ToString();
+            if (selectedFactorId != null)
+            {
+                this.aghlamTableAdapter.FillByAghlamFactorNumber(this.dsWMS.aghlam, selectedFactorId);
+                lblTotalPrice.Text = calculateTotalSum().ToString();
+            }
+        }
+
+        private void btnDeleteFactor_Click(object sender, EventArgs e)
+        {
+            if (selectedFactorId != null)
+            {
+                this.factorTableAdapter.DeleteFactor(selectedFactorId);
+                this.aghlamTableAdapter.DeleteAghlam(selectedFactorId);
+                MessageBox.Show("حذف شد", "پیام", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            frmFactor_Load(sender, e);
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
         {
             frmFactor_Load(sender,e);
         }
 
-        private void buttonX4_Click(object sender, EventArgs e)
+        private void btnSearch_Click(object sender, EventArgs e)
         {
-            panelEx1.Visible = true;
+            panelSearchFactor.Visible = true;
         }
 
-        private void buttonX6_Click(object sender, EventArgs e)
+        private void btnPanelSearchFactor_Click(object sender, EventArgs e)
         {
-            string str = "select * from factor where ";
-            if (txt_tahvilgirandeh.Text != "") str += "custumer like '%" + txt_tahvilgirandeh.Text + "' and ";
-
-            if (txt_code_factor.Text != "") str += "id='" + txt_code_factor.Text + "' and ";
-            if (str == "select * from factor where ")
-                str = "select * from factor";
-            else
-                str = str.Remove(str.Length - 4, 4);
-            DataTable dt = new DataTable();
-            DataBase db = new DataBase();
-            dt = db.MySelect(str);
-            MessageBox.Show(dt.Rows.Count.ToString() + "مورد یافت شد");
-            dataGridViewX1.DataSource = dt;
+            this.factorTableAdapter.FillByFactorId(this.dsWMS.factor, txtPanelFactorCode.Text, txtPanelFactorRecipient.Text);
+            lblTotalPrice.Text = calculateTotalSum().ToString();
+            panelSearchFactor.Visible = false;
         }
 
-        private void buttonX5_Click(object sender, EventArgs e)
+        private void btnExitSearchFactor_Click(object sender, EventArgs e)
         {
-            panelEx1.Visible = false;
+            panelSearchFactor.Visible = false;
         }
 
-        private void textBoxX1_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtPanelFactorCode_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 8)
             {
