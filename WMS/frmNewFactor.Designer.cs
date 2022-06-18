@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmNewFactor));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             this.expandablePanel1 = new DevComponents.DotNetBar.ExpandablePanel();
             this.btnUpdateNewFactor = new DevComponents.DotNetBar.ButtonX();
             this.cmbRecipients = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -93,6 +93,8 @@
             this.anbarTableAdapter = new WMS.dsWMSTableAdapters.anbarTableAdapter();
             this.factorTableAdapter = new WMS.dsWMSTableAdapters.factorTableAdapter();
             this.aghlamTableAdapter = new WMS.dsWMSTableAdapters.aghlamTableAdapter();
+            this.kalaBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.kalaTableAdapter = new WMS.dsWMSTableAdapters.kalaTableAdapter();
             this.expandablePanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tahvilgirandehBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsWMS)).BeginInit();
@@ -106,6 +108,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX2)).BeginInit();
             this.ribbonClientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kalaBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // expandablePanel1
@@ -330,7 +333,7 @@
             this.cmbWarehouses.Size = new System.Drawing.Size(121, 21);
             this.cmbWarehouses.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cmbWarehouses.TabIndex = 12;
-            this.cmbWarehouses.SelectedIndexChanged += new System.EventHandler(this.comboBoxEx3_SelectedIndexChanged);
+            this.cmbWarehouses.SelectedIndexChanged += new System.EventHandler(this.cmbWarehouses_SelectedIndexChanged);
             // 
             // anbarBindingSource
             // 
@@ -422,7 +425,8 @@
             // 
             // cmbNewFactorCommodityDesc
             // 
-            this.cmbNewFactorCommodityDesc.DisplayMember = "Text";
+            this.cmbNewFactorCommodityDesc.DataSource = this.kalaBindingSource;
+            this.cmbNewFactorCommodityDesc.DisplayMember = "des";
             this.cmbNewFactorCommodityDesc.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbNewFactorCommodityDesc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbNewFactorCommodityDesc.FormattingEnabled = true;
@@ -485,6 +489,7 @@
             // 
             this.txtNewFactorCommodityCode.Border.Class = "TextBoxBorder";
             this.txtNewFactorCommodityCode.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtNewFactorCommodityCode.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.kalaBindingSource, "ID", true));
             this.txtNewFactorCommodityCode.Enabled = false;
             this.txtNewFactorCommodityCode.Location = new System.Drawing.Point(99, 63);
             this.txtNewFactorCommodityCode.Name = "txtNewFactorCommodityCode";
@@ -493,7 +498,8 @@
             // 
             // cmbNewFactorCommodityUnitPrice
             // 
-            this.cmbNewFactorCommodityUnitPrice.DisplayMember = "Text";
+            this.cmbNewFactorCommodityUnitPrice.DataSource = this.kalaBindingSource;
+            this.cmbNewFactorCommodityUnitPrice.DisplayMember = "unitprice";
             this.cmbNewFactorCommodityUnitPrice.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbNewFactorCommodityUnitPrice.Enabled = false;
             this.cmbNewFactorCommodityUnitPrice.FormattingEnabled = true;
@@ -555,6 +561,7 @@
             // 
             this.txtNewFactorInventory.Border.Class = "TextBoxBorder";
             this.txtNewFactorInventory.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtNewFactorInventory.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.kalaBindingSource, "cter", true));
             this.txtNewFactorInventory.Enabled = false;
             this.txtNewFactorInventory.Location = new System.Drawing.Point(99, 38);
             this.txtNewFactorInventory.Name = "txtNewFactorInventory";
@@ -591,7 +598,8 @@
             // 
             // cmbNewFactorCommodityName
             // 
-            this.cmbNewFactorCommodityName.DisplayMember = "Text";
+            this.cmbNewFactorCommodityName.DataSource = this.kalaBindingSource;
+            this.cmbNewFactorCommodityName.DisplayMember = "name";
             this.cmbNewFactorCommodityName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbNewFactorCommodityName.FormattingEnabled = true;
             this.cmbNewFactorCommodityName.ItemHeight = 15;
@@ -622,8 +630,8 @@
             // 
             this.dgvNewFactorCommodities.AllowUserToAddRows = false;
             this.dgvNewFactorCommodities.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.dgvNewFactorCommodities.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.dgvNewFactorCommodities.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
             this.dgvNewFactorCommodities.AutoGenerateColumns = false;
             this.dgvNewFactorCommodities.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dgvNewFactorCommodities.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -640,14 +648,14 @@
             this.totalpriceDataGridViewTextBoxColumn,
             this.tarikhDataGridViewTextBoxColumn});
             this.dgvNewFactorCommodities.DataSource = this.aghlamBindingSource;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvNewFactorCommodities.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvNewFactorCommodities.DefaultCellStyle = dataGridViewCellStyle14;
             this.dgvNewFactorCommodities.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvNewFactorCommodities.Location = new System.Drawing.Point(1, 106);
             this.dgvNewFactorCommodities.MultiSelect = false;
@@ -749,14 +757,14 @@
             // dataGridViewX2
             // 
             this.dataGridViewX2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewX2.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewX2.DefaultCellStyle = dataGridViewCellStyle15;
             this.dataGridViewX2.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dataGridViewX2.Location = new System.Drawing.Point(775, 338);
             this.dataGridViewX2.Name = "dataGridViewX2";
@@ -820,14 +828,14 @@
             // dataGridViewX3
             // 
             this.dataGridViewX3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewX3.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewX3.DefaultCellStyle = dataGridViewCellStyle16;
             this.dataGridViewX3.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dataGridViewX3.Location = new System.Drawing.Point(775, 244);
             this.dataGridViewX3.Name = "dataGridViewX3";
@@ -863,6 +871,15 @@
             // 
             this.aghlamTableAdapter.ClearBeforeFill = true;
             // 
+            // kalaBindingSource
+            // 
+            this.kalaBindingSource.DataMember = "kala";
+            this.kalaBindingSource.DataSource = this.dsWMS;
+            // 
+            // kalaTableAdapter
+            // 
+            this.kalaTableAdapter.ClearBeforeFill = true;
+            // 
             // frmNewFactor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -896,6 +913,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX2)).EndInit();
             this.ribbonClientPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kalaBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -961,5 +979,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn unitpriceDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn totalpriceDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn tarikhDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource kalaBindingSource;
+        private dsWMSTableAdapters.kalaTableAdapter kalaTableAdapter;
     }
 }

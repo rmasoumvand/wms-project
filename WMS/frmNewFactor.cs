@@ -20,6 +20,8 @@ namespace WMS
         }
         private void frmNewFactor_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'dsWMS.kala' table. You can move, or remove it, as needed.
+            this.kalaTableAdapter.Fill(this.dsWMS.kala);
             // TODO: This line of code loads data into the 'dsWMS1.aghlam' table. You can move, or remove it, as needed.
 
             this.anbarTableAdapter.Fill(this.dsWMS.anbar);
@@ -82,7 +84,7 @@ namespace WMS
 
         }
 
-        private void comboBoxEx3_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbWarehouses_SelectedIndexChanged(object sender, EventArgs e)
         {
             DataTable dt4 = new DataTable();
             DataBase db = new DataBase();
