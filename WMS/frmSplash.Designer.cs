@@ -65,7 +65,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("B Titr", 57.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.label1.ForeColor = System.Drawing.Color.Chartreuse;
+            this.label1.ForeColor = System.Drawing.Color.Red;
             this.label1.Location = new System.Drawing.Point(27, 47);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(585, 136);
@@ -77,7 +77,7 @@
             this.progressBar.BackColor = System.Drawing.Color.Gray;
             this.progressBar.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.progressBar.Location = new System.Drawing.Point(181, 279);
-            this.progressBar.Name = "progressBarX1";
+            this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(281, 13);
             this.progressBar.TabIndex = 1;
             // 
