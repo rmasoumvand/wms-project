@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSplash));
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.styleManager1 = new DevComponents.DotNetBar.StyleManager(this.components);
+            this.styleManager = new DevComponents.DotNetBar.StyleManager(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -56,9 +56,9 @@
             this.timer.Interval = 200;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
-            // styleManager1
+            // styleManager
             // 
-            this.styleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.Windows7Blue;
+            this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Windows7Blue;
             // 
             // label1
             // 
@@ -66,7 +66,7 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("B Titr", 57.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(27, 47);
+            this.label1.Location = new System.Drawing.Point(10, 47);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(585, 136);
             this.label1.TabIndex = 0;
@@ -197,7 +197,7 @@
         #endregion
 
         private System.Windows.Forms.Timer timer;
-        private DevComponents.DotNetBar.StyleManager styleManager1;
+        private DevComponents.DotNetBar.StyleManager styleManager;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.PictureBox pictureBox1;

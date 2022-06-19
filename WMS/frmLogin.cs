@@ -18,7 +18,7 @@ namespace WMS
             InitializeComponent();
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void timer_Tick(object sender, EventArgs e)
         {
             btn_time.Text = DateTime.Now.ToLongTimeString();
         }

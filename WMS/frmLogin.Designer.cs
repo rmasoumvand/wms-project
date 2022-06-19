@@ -44,8 +44,8 @@
             this.btn_time = new DevComponents.DotNetBar.ButtonX();
             this.btn_date = new DevComponents.DotNetBar.ButtonX();
             this.loginBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.styleManager1 = new DevComponents.DotNetBar.StyleManager(this.components);
+            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.styleManager = new DevComponents.DotNetBar.StyleManager(this.components);
             this.comboItem3 = new DevComponents.Editors.ComboItem();
             this.comboItem4 = new DevComponents.Editors.ComboItem();
             this.loginTableAdapter = new WMS.dsWMSTableAdapters.loginTableAdapter();
@@ -269,14 +269,14 @@
             this.loginBindingSource.DataMember = "login";
             this.loginBindingSource.DataSource = this.dsWMS;
             // 
-            // timer1
+            // timer
             // 
-            this.timer1.Enabled = true;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timer.Enabled = true;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
-            // styleManager1
+            // styleManager
             // 
-            this.styleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.Windows7Blue;
+            this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Windows7Blue;
             // 
             // comboItem3
             // 
@@ -337,8 +337,8 @@
         private DevComponents.DotNetBar.Controls.ReflectionImage reflectionImage1;
         private DevComponents.DotNetBar.LabelX labelX2;
         private DevComponents.DotNetBar.LabelX labelX1;
-        private System.Windows.Forms.Timer timer1;
-        private DevComponents.DotNetBar.StyleManager styleManager1;
+        private System.Windows.Forms.Timer timer;
+        private DevComponents.DotNetBar.StyleManager styleManager;
         private DevComponents.DotNetBar.ButtonX btnCancel;
         private DevComponents.DotNetBar.ButtonX btnLogin;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cmbUserLogin;
