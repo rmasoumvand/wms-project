@@ -37,7 +37,9 @@ namespace WMS
         
         private void btnAddNewFactorItem_Click(object sender, EventArgs e)
         {
-            
+            int totalPrice = int.Parse(cmbNewFactorCommodityUnitPrice.Text) * int.Parse(txtNewFactorCommodityAmount.Text);
+            this.aghlamTableAdapter.AddNewAghlam(int.Parse(txtNewFactorCommodityCode.Text), int.Parse(txtNewFactorCommodityAmount.Text),  int.Parse(txtFactorNumber.Text), int.Parse(txtNewFactorCommodityCode.Text), -2);
+            this.aghlamTableAdapter.Fill(this.dsWMS1.aghlam);
         }
 
         private void dgvNewFactorCommodities_MouseUp(object sender, MouseEventArgs e)
@@ -50,12 +52,12 @@ namespace WMS
 
         private void btnDeleteFactorItem_Click(object sender, EventArgs e)
         {
-           
+            this.aghlamTableAdapter.DeleteAghlam(txtFactorNumber.Text);
         }
 
         private void btnSaveNewFactor_Click(object sender, EventArgs e)
         {
-            
+            //
         }
 
         private void txtFactorNumber_TextChanged(object sender, EventArgs e)
