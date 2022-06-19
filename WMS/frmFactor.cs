@@ -29,8 +29,7 @@ namespace WMS
         private string selectedFactorId;
         private void btnAddEdit_Click(object sender, EventArgs e)
         {
-            new frmNewFactor().ShowDialog();
-            selectedFactorId = null;
+            new frmNewFactor(selectedFactorId).ShowDialog();
         }
 
         private void frmFactor_Load(object sender, EventArgs e)

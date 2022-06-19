@@ -12,9 +12,12 @@ namespace WMS
     public partial class frmNewFactor : Form
     {
         private string selectedFactorNumber;
-        public frmNewFactor()
+        public frmNewFactor(string selectedFactorId)
         {
             InitializeComponent();
+
+            if (selectedFactorId != null)
+                txtFactorNumber.Text = selectedFactorId;
         }
         private void frmNewFactor_Load(object sender, EventArgs e)
         {
