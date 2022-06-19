@@ -215,6 +215,7 @@
             this.dgvFactors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvFactors.Size = new System.Drawing.Size(646, 221);
             this.dgvFactors.TabIndex = 1;
+            this.dgvFactors.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFactors_CellDoubleClick);
             this.dgvFactors.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dgvFactors_MouseUp);
             // 
             // iDDataGridViewTextBoxColumn

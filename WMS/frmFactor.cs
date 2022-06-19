@@ -99,5 +99,10 @@ namespace WMS
             txtPanelFactorCode.Clear();
             txtPanelFactorRecipient.Clear();
         }
+
+        private void dgvFactors_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            btnAddEdit_Click(null, e);
+        }
     }
 }
